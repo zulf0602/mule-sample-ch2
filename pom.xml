@@ -41,7 +41,7 @@
 							<muleVersion>4.4.0</muleVersion>
 							<!-- reads credentials from settings.xml -->
 							<server>cloudhub-deploy</server>							
-							<applicationName>YOUR-APP</applicationName>
+							<applicationName>hello-zulfiquer</applicationName>
 							<replicas>1</replicas>
 							<vCores>0.1</vCores>
 							<!-- 4 mins deployment timeout -->
