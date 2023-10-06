@@ -30,21 +30,46 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<cloudHubDeployment>
-						<uri>https://anypoint.mulesoft.com</uri>
-						<muleVersion>4.4.0</muleVersion>
-						<username>${username}</username>
-						<password>${password}</password>
-						<applicationName>${app-name}</applicationName>
-						<environment>${env}</environment>
-						<objectStoreV2>true</objectStoreV2>
-						<persistentQueues>false</persistentQueues>
-						<workers>1</workers>
-						<workerType>SMALL</workerType>
-						<properties>
-						  <cicd.welcome.message>${cicd.welcome.message}</cicd.welcome.message>
-					        </properties>
-					</cloudHubDeployment>
+					<cloudhub2Deployment>
+							<uri>https://anypoint.mulesoft.com</uri>
+							<businessGroupId>${project.groupId}</businessGroupId>
+							<!-- CAREFUL Environment is case sensitive -->
+							<environment>${environment}</environment>
+							<!-- Target=region, US, London, Frankfurt-->
+							<target>Cloudhub-US-East-2</target>
+							<provider>MC</provider>
+							<muleVersion>4.4.0</muleVersion>
+							<!-- reads credentials from settings.xml -->
+							<server>cloudhub-deploy</server>							
+							<applicationName>YOUR-APP</applicationName>
+							<replicas>1</replicas>
+							<vCores>0.1</vCores>
+							<!-- 4 mins deployment timeout -->
+							<deploymentTimeout>240000</deploymentTimeout>
+							<!-- Properties  clientid, clientsecret, API Manager credentials-->
+							<properties>
+								<cicd.welcome.message>${cicd.welcome.message}</cicd.welcome.message>
+							</properties>
+							<!-- secureProperties are hidden and stored encrypted in the Runtime Manager -->
+						      <secureProperties>
+							<user.name>${user.name}</user.name>
+						      </secureProperties>
+							<deploymentSettings>
+								<http>
+									<inbound>
+										<!-- true, because the HTTP Listener uses TLS/HTTPS-->
+										<lastMileSecurity>false</lastMileSecurity>
+									</inbound>
+								</http>
+							</deploymentSettings>
+							<integrations>
+								<services>
+									<objectStoreV2>
+										<enabled>true</enabled>
+									</objectStoreV2>
+								</services>
+							</integrations>
+						</cloudhub2Deployment>
 					<classifier>mule-application</classifier>
 				</configuration>
 			</plugin>
