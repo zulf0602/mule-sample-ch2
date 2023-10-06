@@ -132,4 +132,4 @@ jobs:
       env:
         AUTHOR: "Mr Bean"
       run: |
-        mvn clean deploy --file pom.xml -DmuleDeploy -Denvironment="Sandbox" -Duser.name="${{ secrets.USER }}" -Dcicd.welcome.message="put your hello message here" 
+        mvn clean deploy --file pom.xml -DmuleDeploy -Denvironment="Dev" -Duser.name="${{ secrets.USER }}" -Dcicd.welcome.message="put your hello message here" 
